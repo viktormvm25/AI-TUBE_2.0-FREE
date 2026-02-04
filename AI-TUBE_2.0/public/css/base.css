@@ -1,0 +1,326 @@
+/* ==========================================
+   BASE.CSS - Переменные, сброс, фон, пузырьки
+   ========================================== */
+
+:root {
+    --neon-cyan: #00F6FF;
+    --neon-magenta: #FF2BD6;
+    --neon-purple: #8A2CFF;
+    --neon-blue: #2B6CFF;
+    --neon-green: #00FF9A;
+    --bg-0: #05020D;
+    --bg-1: #090322;
+    --glow-cyan: 0 0 10px rgba(0, 246, 255, 0.6), 0 0 20px rgba(0, 246, 255, 0.3);
+    --glow-magenta: 0 0 10px rgba(255, 43, 214, 0.6), 0 0 20px rgba(255, 43, 214, 0.3);
+    --primary: var(--neon-cyan);
+    --primary-dim: rgba(0, 246, 255, 0.15);
+    --secondary: var(--neon-purple);
+    --secondary-dim: rgba(138, 44, 255, 0.15);
+    --danger: #ff0055;
+    --text-color: #ffffff;
+    --glass: rgba(20, 20, 35, 0.65);
+    --radius: 12px;
+}
+
+body.theme-purple {
+    --primary: var(--neon-magenta);
+    --secondary: var(--neon-blue);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    outline: none;
+    font-weight: 500;
+}
+
+body {
+    background-color: var(--bg-0);
+    color: var(--text-color);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    min-height: 100vh;
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(5, 2, 13, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+    box-shadow: 0 0 5px var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) rgba(5, 2, 13, 0.8);
+}
+
+#app-background {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background: #05020D;
+}
+
+#aurora-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: linear-gradient(to right,
+            var(--neon-blue),
+            var(--neon-purple),
+            var(--neon-magenta),
+            var(--neon-cyan),
+            var(--neon-blue),
+            var(--neon-purple),
+            var(--neon-magenta),
+            var(--neon-cyan),
+            var(--neon-blue));
+    background-size: 200% 100%;
+    filter: blur(20px);
+    opacity: 0.7;
+    animation: auroraFlow 15s linear infinite;
+    mix-blend-mode: screen;
+}
+
+#shimmer-overlay {
+    display: none;
+}
+
+@keyframes auroraFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes shimmerMove {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-20px, -20px);
+    }
+}
+
+/* === NEON BUBBLES === */
+#neon-bubbles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: bubbleRise linear infinite;
+}
+
+.bubble:nth-child(1) {
+    width: 20px;
+    height: 20px;
+    left: 5%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 246, 255, 0.8), rgba(0, 246, 255, 0.1));
+    box-shadow: 0 0 20px rgba(0, 246, 255, 0.6), 0 0 40px rgba(0, 246, 255, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation-duration: 12s;
+    animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+    width: 35px;
+    height: 35px;
+    left: 15%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 43, 214, 0.8), rgba(255, 43, 214, 0.1));
+    box-shadow: 0 0 25px rgba(255, 43, 214, 0.6), 0 0 50px rgba(255, 43, 214, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation-duration: 15s;
+    animation-delay: 2s;
+}
+
+.bubble:nth-child(3) {
+    width: 15px;
+    height: 15px;
+    left: 25%;
+    background: radial-gradient(circle at 30% 30%, rgba(138, 44, 255, 0.8), rgba(138, 44, 255, 0.1));
+    box-shadow: 0 0 15px rgba(138, 44, 255, 0.6), 0 0 30px rgba(138, 44, 255, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.3);
+    animation-duration: 10s;
+    animation-delay: 1s;
+}
+
+.bubble:nth-child(4) {
+    width: 45px;
+    height: 45px;
+    left: 40%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 246, 255, 0.7), rgba(0, 246, 255, 0.1));
+    box-shadow: 0 0 30px rgba(0, 246, 255, 0.5), 0 0 60px rgba(0, 246, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.2);
+    animation-duration: 18s;
+    animation-delay: 4s;
+}
+
+.bubble:nth-child(5) {
+    width: 25px;
+    height: 25px;
+    left: 55%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 255, 154, 0.8), rgba(0, 255, 154, 0.1));
+    box-shadow: 0 0 20px rgba(0, 255, 154, 0.6), 0 0 40px rgba(0, 255, 154, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation-duration: 14s;
+    animation-delay: 3s;
+}
+
+.bubble:nth-child(6) {
+    width: 18px;
+    height: 18px;
+    left: 65%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 43, 214, 0.7), rgba(255, 43, 214, 0.1));
+    box-shadow: 0 0 18px rgba(255, 43, 214, 0.5), 0 0 35px rgba(255, 43, 214, 0.2), inset 0 0 8px rgba(255, 255, 255, 0.3);
+    animation-duration: 11s;
+    animation-delay: 5s;
+}
+
+.bubble:nth-child(7) {
+    width: 40px;
+    height: 40px;
+    left: 75%;
+    background: radial-gradient(circle at 30% 30%, rgba(43, 108, 255, 0.8), rgba(43, 108, 255, 0.1));
+    box-shadow: 0 0 25px rgba(43, 108, 255, 0.6), 0 0 50px rgba(43, 108, 255, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.3);
+    animation-duration: 16s;
+    animation-delay: 1.5s;
+}
+
+.bubble:nth-child(8) {
+    width: 12px;
+    height: 12px;
+    left: 85%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 246, 255, 0.9), rgba(0, 246, 255, 0.2));
+    box-shadow: 0 0 12px rgba(0, 246, 255, 0.7), 0 0 25px rgba(0, 246, 255, 0.4), inset 0 0 6px rgba(255, 255, 255, 0.4);
+    animation-duration: 9s;
+    animation-delay: 2.5s;
+}
+
+.bubble:nth-child(9) {
+    width: 30px;
+    height: 30px;
+    left: 92%;
+    background: radial-gradient(circle at 30% 30%, rgba(138, 44, 255, 0.7), rgba(138, 44, 255, 0.1));
+    box-shadow: 0 0 22px rgba(138, 44, 255, 0.5), 0 0 45px rgba(138, 44, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    animation-duration: 13s;
+    animation-delay: 6s;
+}
+
+.bubble:nth-child(10) {
+    width: 22px;
+    height: 22px;
+    left: 35%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 255, 154, 0.7), rgba(0, 255, 154, 0.1));
+    box-shadow: 0 0 18px rgba(0, 255, 154, 0.5), 0 0 35px rgba(0, 255, 154, 0.2), inset 0 0 8px rgba(255, 255, 255, 0.3);
+    animation-duration: 17s;
+    animation-delay: 7s;
+}
+
+.bubble:nth-child(11) {
+    width: 28px;
+    height: 28px;
+    left: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 43, 214, 0.6), rgba(255, 43, 214, 0.1));
+    box-shadow: 0 0 20px rgba(255, 43, 214, 0.4), 0 0 40px rgba(255, 43, 214, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.2);
+    animation-duration: 19s;
+    animation-delay: 8s;
+}
+
+.bubble:nth-child(12) {
+    width: 16px;
+    height: 16px;
+    left: 10%;
+    background: radial-gradient(circle at 30% 30%, rgba(43, 108, 255, 0.8), rgba(43, 108, 255, 0.1));
+    box-shadow: 0 0 15px rgba(43, 108, 255, 0.6), 0 0 30px rgba(43, 108, 255, 0.3), inset 0 0 7px rgba(255, 255, 255, 0.3);
+    animation-duration: 11s;
+    animation-delay: 4.5s;
+}
+
+@keyframes bubbleRise {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+        transform: translateX(0) scale(0.5);
+    }
+
+    5% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    95% {
+        opacity: 0.3;
+    }
+
+    100% {
+        bottom: 110vh;
+        opacity: 0;
+        transform: translateX(30px) scale(0.8);
+    }
+}
+
+.bubble:nth-child(odd) {
+    animation-name: bubbleRiseLeft;
+}
+
+@keyframes bubbleRiseLeft {
+    0% {
+        bottom: -100px;
+        opacity: 0;
+        transform: translateX(0) scale(0.5);
+    }
+
+    5% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    25% {
+        transform: translateX(-20px) scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: translateX(15px) scale(0.95);
+    }
+
+    75% {
+        transform: translateX(-10px) scale(0.9);
+    }
+
+    95% {
+        opacity: 0.3;
+    }
+
+    100% {
+        bottom: 110vh;
+        opacity: 0;
+        transform: translateX(20px) scale(0.8);
+    }
+}
